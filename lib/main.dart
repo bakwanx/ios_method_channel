@@ -32,21 +32,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static const platform = MethodChannel('samples.flutter.dev/battery');
-  String _batteryLevel = 'Unknown battery level.';
+  static const platform = MethodChannel('id.vida.vidaLiveness');
+  String _batteryLevel = 'Test';
 
   Future<void> _getBatteryLevel() async {
     String batteryLevel;
     try {
-      final result = await platform.invokeMethod<int>('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
+      final result = await platform.invokeMethod<int>('doLiveness');
+      debugPrint("result liveness ${result}");
+      // batteryLevel = 'Battery level at $result % .';
     } on PlatformException catch (e) {
       batteryLevel = "Failed to get battery level: '${e.message}'.";
     }
 
-    setState(() {
-      _batteryLevel = batteryLevel;
-    });
+    // setState(() {
+    //   _batteryLevel = batteryLevel;
+    // });
   }
 
   @override
